@@ -1,13 +1,13 @@
 "use client";
 import { sidebarLinks } from "@/constants";
-import { SignOutButton, SignedIn } from "@clerk/nextjs";
+
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 function Bottombar() {
   const pathname = usePathname();
-  const userouter = useRouter();
+
   return (
     <section className="bottombar">
       <div className="bottombar_container">
