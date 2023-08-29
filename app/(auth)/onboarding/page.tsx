@@ -4,13 +4,7 @@ import { currentUser } from "@clerk/nextjs";
 async function Page() {
   const user = await currentUser();
 
-  const userInfo = {
-    id: "",
-    username: "",
-    name: "",
-    bio: "",
-    image: "",
-  };
+  const userInfo = {};
 
   const userData = {
     id: user?.id || "", // Provide a default value if user?.id is undefined
