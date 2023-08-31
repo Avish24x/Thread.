@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 let isConnected = false; // variable to check if mongoose is connected
 
 export const connectToDB = async () => {
-  mongoose.set("strictQuery", true);
+  mongoose.set("strictQuery", true); //to prevent unknown field queries
 
   if (!process.env.MONGODB_URL) return console.log("MONGODB_URL NOT FOUND");
 

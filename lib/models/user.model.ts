@@ -11,15 +11,15 @@ const userSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "Thread",
     },
-  ],
+  ],  //user can have many threads 
   onboarded: {
     type: Boolean,
     default: false,
   },
-  communities: [
+  communities: [  //one user can belong to many commnunities 
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "community",
+      ref: "community", //reference to community DB
     },
   ],
 });
