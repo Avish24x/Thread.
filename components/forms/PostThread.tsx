@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -16,10 +15,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { usePathname, useRouter } from "next/navigation";
 
-import { updateUser } from "@/lib/actions/user.actions";
+// import { updateUser } from "@/lib/actions/user.actions";
 import { ThreadValidation } from "@/lib/validations/thread";
 import { createThread } from "@/lib/actions/thread.actions";
-import { getRandomValues } from "crypto";
+
 
 interface Props {
   user: {

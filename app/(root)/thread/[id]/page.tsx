@@ -1,4 +1,3 @@
-import { redirect } from "next/navigation";
 import { currentUser } from "@clerk/nextjs";
 
 import Comment from "@/components/forms/Comment";
@@ -6,10 +5,12 @@ import ThreadCard from "@/components/cards/ThreadCard";
 
 import { fetchUser } from "@/lib/actions/user.actions";
 import { fetchThreadById } from "@/lib/actions/thread.actions";
+import { redirect } from "next/navigation";
+import User from "@/lib/models/user.model";
 
 export const revalidate = 0;
 
-async function page({ params }: { params: { id: string } }) {
+const Page = async ({ params }: { params: { id: string } }) => {
   if (!params.id) return null;
 
   const user = await currentUser();
@@ -24,21 +25,23 @@ async function page({ params }: { params: { id: string } }) {
     <section className="relative">
       <div>
         <ThreadCard
+          key={thread._id}
           id={thread._id}
-          currentUserId={user.id}
+          currentUserId={user.id || ""}
           parentId={thread.parentId}
           content={thread.text}
           author={thread.author}
           community={thread.community}
           createdAt={thread.createdAt}
           comments={thread.children}
+          isComment
         />
       </div>
 
       <div className="mt-7">
         <Comment
-          threadId={params.id}
-          currentUserImg={user.imageUrl}
+          threadId={thread._id}
+          currentUserImg={userInfo.image}
           currentUserId={JSON.stringify(userInfo._id)}
         />
       </div>
@@ -48,7 +51,7 @@ async function page({ params }: { params: { id: string } }) {
           <ThreadCard
             key={childItem._id}
             id={childItem._id}
-            currentUserId={user.id}
+            currentUserId={childItem?.id || ""}
             parentId={childItem.parentId}
             content={childItem.text}
             author={childItem.author}
@@ -61,6 +64,6 @@ async function page({ params }: { params: { id: string } }) {
       </div>
     </section>
   );
-}
+};
 
-export default page;
+export default Page;
